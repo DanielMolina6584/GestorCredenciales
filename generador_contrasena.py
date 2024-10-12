@@ -26,7 +26,7 @@ class GeneradorContrasena:
             'usar_letras': letra,
             'usar_numeros': numero
         }
-        print("Configuración guardada exitosamente.")
+        print("Configuración guardada exitosamente")
 
     def mostrar_configuracion(self):
         if not self.configuracion:
@@ -35,7 +35,7 @@ class GeneradorContrasena:
             print(f"Usar letras: {'Sí' if self.configuracion['usar_letras'] else 'No'}")
             print(f"Usar números: {'Sí' if self.configuracion['usar_numeros'] else 'No'}")
         else:
-            print("No hay configuración guardada.")
+            print("No hay configuración guardada")
 
     def generar_contrasena(self) -> str:
         if not self.configuracion:
@@ -43,18 +43,22 @@ class GeneradorContrasena:
             self.configurar_contrasena()
 
         caracteres:str = ''
+        # Se usa la libreria string, la cual puede traer los numeros y letras facilmente
+        # Se puede hacer tambien quemando cada letra y numero
         if self.configuracion['usar_letras']:
             caracteres += string.ascii_letters
         if self.configuracion['usar_numeros']:
             caracteres += string.digits
 
+        # La libreria ramdom elige un caracter al azar, y los va uniendo por el join, esto lo hara
+        # en el rango de la longitud
         contrasena:str = ''.join(random.choice(caracteres) for _ in range(self.configuracion['longitud']))
         return contrasena
 
     def menu(self) -> str:
         while True:
             if self.configuracion:
-                print("\n--- Menú del Generador de Contraseñas ---")
+                print("\n======Menú del Generador de Contraseñas======")
                 self.mostrar_configuracion()
                 opcion:str = input("¿Desea usar esta configuración (s), crear una nueva (n): ").lower()
                 if opcion == 's':
@@ -64,6 +68,6 @@ class GeneradorContrasena:
                 elif opcion == 'n':
                     self.configurar_contrasena()
                 else:
-                    print("Opción no válida. Por favor, intente de nuevo.")
+                    print("Opción no válida")
             else:
                 self.configurar_contrasena()
