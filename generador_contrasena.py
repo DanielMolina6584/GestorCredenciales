@@ -29,7 +29,7 @@ class GeneradorContrasena:
         print("Configuración guardada exitosamente")
 
     def mostrar_configuracion(self):
-        if not self.configuracion:
+        if self.configuracion:
             print("Configuración actual:")
             print(f"Longitud: {self.configuracion['longitud']}")
             print(f"Usar letras: {'Sí' if self.configuracion['usar_letras'] else 'No'}")
